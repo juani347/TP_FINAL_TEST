@@ -103,6 +103,9 @@
    <hash n="oracle.jdeveloper.model.PathsConfiguration">
       <hash n="javaContentSet">
          <list n="pattern-filters">
+            <string v="-Test/AdministradorTestSuite.java"/>
+            <string v="-Test/AdministradorTest1.java"/>
+            <string v="-Test/AdministradorTestFixture1.java"/>
             <string v="+**"/>
          </list>
          <list n="url-path">
