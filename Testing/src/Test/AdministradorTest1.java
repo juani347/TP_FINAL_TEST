@@ -289,12 +289,12 @@ public class AdministradorTest1
     {
         try
         {
-            Date d1= new Date(2018,10,1);
-            Date d2= new Date(2018,10,30);
+            Date d1= new Date(2018,11,1);
+            Date d2= new Date();
             long horas= (d2.getTime() - d1.getTime())/3600000;
             String resultado= fixture1.admin.solicitarTareasEnCursoColaboradores();
             Colaborador c1= fixture1.admin.getBdd().getColaboradores().get(0);
-            String m1= "Pilar" + " " + "Juan" + " " + "Limpiar" + " " + d1 + " " + "cerrada";
+            String m1= "Guille" + " " + "Pedro" + " " + "Ordenar" + " " + d1 + " " + "abierta" + " " + horas + "\n";
             String mensaje= " Colaborador   |   Cliente  | Servicio  | Inicio    | Estado    | Horas accumuladas | \n" + "" + "\n";
             assertEquals("Informe incorrecto",resultado,mensaje);
         }

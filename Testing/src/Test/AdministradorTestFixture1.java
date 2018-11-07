@@ -31,12 +31,16 @@ public class AdministradorTestFixture1
          this.admin.getBdd().getClientes().add(c3);
          Servicio s1= new Servicio("Limpiar","Fijo",100);
          Servicio s2= new Servicio("Cocinar","Por hora",25);
+         Servicio s3= new Servicio("Ordenar","Fijo",50);
          this.admin.getBdd().getServicios().add(s1);
          this.admin.getBdd().getServicios().add(s2);
+         this.admin.getBdd().getServicios().add(s3);
          Colaborador col1= new Colaborador("Pilar","pili@gmail.com","111111111","111A","1234","Colaborador");
          Colaborador col2= new Colaborador("Sanchez","sanchez@gmail.com","222222222","222B","2345","Colaborador");
+         Colaborador col3= new Colaborador("Guille","guillote@gmail.com","333333333","333C","5555","Colaborador");
          this.admin.getBdd().getColaboradores().add(col1);
          this.admin.getBdd().getColaboradores().add(col2);
+         this.admin.getBdd().getColaboradores().add(col3);
          GrupoClientes g1=new GrupoClientes();
          GrupoClientes g2=new GrupoClientes();
          g1.setNombre("grupo1");
@@ -55,12 +59,20 @@ public class AdministradorTestFixture1
         } catch (HayTareaAbiertaException e)
         {
         }
+        try
+        {
+            this.admin.crearTarea(s3, c3, col3);
+        } catch (HayTareaAbiertaException e)
+        {
+        }
         col1.getTareas().get(c1).setFechainicio(new Date(2018,10,1));
         col1.getTareas().get(c1).setFechacierre(new Date(2018,10,30));
         col1.getTareas().get(c1).setEstado(new CerradaState(col1.getTareas().get(c1)));
         col2.getTareas().get(c2).setFechainicio(new Date(2018,10,1));
         col2.getTareas().get(c2).setFechacierre(new Date(2018,10,10));
-         col1.getTareas().get(c2).setEstado(new CerradaState(col1.getTareas().get(c2)));
+        col3.getTareas().get(c2).setEstado(new CerradaState(col1.getTareas().get(c2)));
+        col3.getTareas().get(c3).setFechainicio(new Date(2018,11,1));
+         
      }
 
      public void tearDown()
