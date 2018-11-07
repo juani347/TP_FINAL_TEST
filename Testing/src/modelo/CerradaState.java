@@ -10,8 +10,7 @@ public class CerradaState implements State {
     public CerradaState(Tarea tarea) {
         this.tarea = tarea;
         if(!this.tarea.getServicio().getTipo().equals("Fijo"))
-            this.tarea.setCostototal(this.tarea.getServicio().getCosto()* (int )((this.tarea.getFechacierre().getTime() - this.tarea.getFechainicio().getTime())/3600000));
-        else
+            this.tarea.setCostototal(this.tarea.getServicio().getCosto()* (int )((this.tarea.getFechacierre().getTime() - this.tarea.getFechainicio().getTime())/3600000));        else
             this.tarea.setCostototal(this.tarea.getServicio().getCosto());
     }
 
