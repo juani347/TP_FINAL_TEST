@@ -1,5 +1,7 @@
 package Test;
 
+import java.util.Date;
+
 import modelo.Cliente;
 import modelo.Servicio;
 
@@ -58,7 +60,7 @@ public class ColaboradorTest1
         {
             int size=this.fixture1.colab.getTareas().size();
             this.fixture1.colab.crearTarea(new Servicio("Limpiar","tipoA",52),new Cliente("Juan","juan@gmail.com","4324234","2121321312","123","grupo1"));
-            assertTrue(size+1==this.fixture1.colab.getTareas().size());
+            assertTrue("No se agregó la tarea",size+1==this.fixture1.colab.getTareas().size());
         }
         catch(final Exception e)
         {
@@ -76,7 +78,7 @@ public class ColaboradorTest1
         {
             int size=this.fixture1.colab.getTareas().size();
             this.fixture1.colab.crearTarea(new Servicio("Limpiar","tipoA",52),new Cliente("Fran","fran@gmail.com","1234234","2134536546","222","grupo3"));
-            assertTrue(size+1==this.fixture1.colab.getTareas().size());
+            assertTrue("No se agregó la tarea",size+1==this.fixture1.colab.getTareas().size());
         }
         catch(final Exception e)
         {
@@ -94,7 +96,7 @@ public class ColaboradorTest1
         {
             int size=this.fixture1.colab.getTareas().size();
             this.fixture1.colab.crearTarea(new Servicio("Cocinar","tipoA",100),new Cliente("Juan","juan@gmail.com","4324234","2121321312","123","grupo1"));
-            assertTrue(size+1==this.fixture1.colab.getTareas().size());
+            assertTrue("No se agregó la tarea",size+1==this.fixture1.colab.getTareas().size());
         }
         catch(final Exception e)
         {
@@ -112,7 +114,7 @@ public class ColaboradorTest1
         {
             int size=this.fixture1.colab.getTareas().size();
             this.fixture1.colab.crearTarea(new Servicio("Cocinar","tipoA",100),new Cliente("Nico","nico@gmail.com","54354234","12111112","333","grupo2"));
-            assertTrue(size+1==this.fixture1.colab.getTareas().size());   
+            assertTrue("No se agregó la tarea",size+1==this.fixture1.colab.getTareas().size());   
         }
         catch(final Exception e)
         {
@@ -130,11 +132,11 @@ public class ColaboradorTest1
         {
             int size=this.fixture1.colab.getTareas().size();
             this.fixture1.colab.crearTarea(null,null);
-            assertTrue(size+1==this.fixture1.colab.getTareas().size());   
+            fail("Crear una tarea con contenido nulo no dispara excepcion");
         }
         catch(final Exception e)
         {
-            fail("Crear una tarea nula dispara excepcion");
+            
         }
     }
     
@@ -148,11 +150,11 @@ public class ColaboradorTest1
         {
             int size=this.fixture1.colab.getTareas().size();
             this.fixture1.colab.crearTarea(new Servicio("Barrer","tipoA",150),new Cliente("Fran","fran@gmail.com","1234234","2134536546","222","grupo3"));
-            assertTrue(size+1==this.fixture1.colab.getTareas().size());   
+            fail("Crear una tarea repetida y con un cliente atendido en otra tarea dispara excepcion");
         }
         catch(final Exception e)
         {
-            fail("Crear una tarea repetida y con un cliente atendido en otra tarea dispara excepcion");
+            
         }
     }
 
@@ -166,7 +168,7 @@ public class ColaboradorTest1
         {
             int size=this.fixture1.colab.getTareas().size();
             this.fixture1.colab.eliminarTarea(this.fixture1.tareas.get(0));
-            assertTrue(size-1==this.fixture1.colab.getTareas().size());
+            assertTrue("No se elimino la tarea",size-1==this.fixture1.colab.getTareas().size());
         }
         catch(final Exception e)
         {
@@ -184,7 +186,7 @@ public class ColaboradorTest1
         {
             int size=this.fixture1.colab.getTareas().size();
             this.fixture1.colab.eliminarTarea(this.fixture1.tareas.get(0));
-            assertTrue(size-1==this.fixture1.colab.getTareas().size());
+            assertTrue("No se elimino la tarea",size-1==this.fixture1.colab.getTareas().size());
             
         }
         catch(final Exception e)
@@ -201,14 +203,12 @@ public class ColaboradorTest1
     {
         try
         {
-            int size=this.fixture1.colab.getTareas().size();
+            //int size=this.fixture1.colab.getTareas().size();
             this.fixture1.colab.eliminarTarea(null);
-            assertTrue(size-1==this.fixture1.colab.getTareas().size());
-            
+            fail("No se verifica que la tarea sea null");
         }
         catch(final Exception e)
         {
-            fail("No se verifica que la tarea sea null");
         }
     }
 
@@ -242,7 +242,6 @@ public class ColaboradorTest1
         }
         catch(final Exception e)
         {
-            assertTrue("La tarea no fue cerrada",this.fixture1.colab.getTareas().get(fixture1.tareas.get(3).getCliente()).getEstado().devolverestado().equalsIgnoreCase("cerrada"));
         }
     }
     
@@ -255,11 +254,10 @@ public class ColaboradorTest1
         try
         {
             this.fixture1.colab.cerrarTarea(null);
-            assertTrue("La tarea no fue cerrada",this.fixture1.colab.getTareas().get(null).getEstado().devolverestado().equalsIgnoreCase("cerrada"));
+            fail("No se chequea que la tarea sea nula");
         }
         catch(final Exception e)
         {
-            fail("No se chequea que la tarea sea nula");
         }
     }
     
@@ -293,7 +291,6 @@ public class ColaboradorTest1
         }
         catch(final Exception e)
         {
-            assertTrue("La tarea no esta pausada",this.fixture1.colab.getTareas().get(fixture1.tareas.get(2)).getEstado().devolverestado().equalsIgnoreCase("pausada"));
         }
     }
     
@@ -310,7 +307,6 @@ public class ColaboradorTest1
         }
         catch(final Exception e)
         {
-            assertTrue("La tarea no esta pausada",this.fixture1.colab.getTareas().get(fixture1.tareas.get(3)).getEstado().devolverestado().equalsIgnoreCase("pausada"));
         }
     }
 
@@ -328,7 +324,6 @@ public class ColaboradorTest1
         }
         catch(final Exception e)
         {
-            assertTrue("La tarea no se reanudo",this.fixture1.colab.getTareas().get(fixture1.tareas.get(0)).getEstado().devolverestado().equalsIgnoreCase("abierta"));
         }
     }
     
@@ -362,7 +357,6 @@ public class ColaboradorTest1
         }
         catch(final Exception e)
         {
-            assertTrue("La tarea se reanudo",this.fixture1.colab.getTareas().get(fixture1.tareas.get(3)).getEstado().devolverestado().equalsIgnoreCase("cerrada"));
         }
     }
     
@@ -379,9 +373,67 @@ public class ColaboradorTest1
      * @see modelo.Colaborador#solicitarITareasIntervaloCliente(modelo.Cliente,java.util.Date,java.util.Date)
      */
     @Test
-    public void testSolicitarITareasIntervaloCliente()
+    public void testSolicitarITareasIntervaloCliente1()
     {
-        fail("Unimplemented");
+        try
+        {
+            Cliente c1= new Cliente("Juan","juan@gmail.com","4324234","2121321312","123","grupo1");
+            Date d1= new Date(2018,10,1);
+            Date d2= new Date(2018,10,20);
+            long horas= (d2.getTime() - d1.getTime())/3600000;
+            String resultado= fixture1.colab.solicitarITareasIntervaloCliente(c1, d1, d2);
+            String mensaje= "Tarea de Servicio | Total horas  | Importe \n" + "Limpiar"+ " " + horas + " " + 100 + "\n";
+            assertEquals("Informe incorrecto",resultado,mensaje);
+        }
+        catch( final Exception e )
+        {
+            fail("solicitarInformeCliente dispara excepcion");
+        }
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasIntervaloCliente(modelo.Cliente,java.util.Date,java.util.Date)
+     */
+    @Test
+    public void testSolicitarITareasIntervaloCliente2()
+    {
+        
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasIntervaloCliente(modelo.Cliente,java.util.Date,java.util.Date)
+     */
+    @Test
+    public void testSolicitarITareasIntervaloCliente3()
+    {
+        
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasIntervaloCliente(modelo.Cliente,java.util.Date,java.util.Date)
+     */
+    @Test
+    public void testSolicitarITareasIntervaloCliente4()
+    {
+        
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasIntervaloCliente(modelo.Cliente,java.util.Date,java.util.Date)
+     */
+    @Test
+    public void testSolicitarITareasIntervaloCliente5()
+    {
+        
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasIntervaloCliente(modelo.Cliente,java.util.Date,java.util.Date)
+     */
+    @Test
+    public void testSolicitarITareasIntervaloCliente6()
+    {
+        
     }
 
     /**
