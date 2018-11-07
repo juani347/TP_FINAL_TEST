@@ -72,7 +72,6 @@ public class AdministradorTestFixture1
         col2.getTareas().get(c2).setFechacierre(new Date(2018,10,10));
         col3.getTareas().get(c2).setEstado(new CerradaState(col1.getTareas().get(c2)));
         col3.getTareas().get(c3).setFechainicio(new Date(2018,11,1));
-         
      }
 
      public void tearDown()

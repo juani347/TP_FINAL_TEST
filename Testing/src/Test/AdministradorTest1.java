@@ -96,6 +96,29 @@ public class AdministradorTest1
     {
         try
         {
+            Cliente c3= new Cliente("Pedro","pedro@gmail.com","1124234","0123212","443","grupo2");
+            Date d1= new Date(2018,11,1);
+            Date d2= new Date();
+            long horas= (d2.getTime() - d1.getTime())/3600000;
+            double costo= (double) horas * 50;
+            String resultado= fixture1.admin.solicitarInformeCliente(c3, d1, d2);
+            String mensaje= "Tarea de Servicio | Total horas  | Importe \n" + "Cocinar"+ " " + horas + " " + costo + "\n";
+            assertEquals("Informe incorrecto",resultado,mensaje);
+        }
+        catch( final Exception e )
+        {
+            fail("solicitarInformeCliente dispara excepcion");
+        }
+    }
+    
+    /**
+     * @see modelo.Administrador#solicitarInformeCliente(modelo.Cliente,java.util.Date,java.util.Date)
+     */
+    @Test
+    public void testSolicitarInformeCliente4()
+    {
+        try
+        {
             Cliente c1= new Cliente("Peter","peter@gmail.com","4324234","2121321312","123","grupo1");
             Date d1= new Date(2018,10,1);
             Date d2= new Date(2018,10,20);
@@ -113,7 +136,7 @@ public class AdministradorTest1
      * @see modelo.Administrador#solicitarInformeCliente(modelo.Cliente,java.util.Date,java.util.Date)
      */
     @Test
-    public void testSolicitarInformeCliente4()
+    public void testSolicitarInformeCliente5()
     {
         try
         {
@@ -135,7 +158,7 @@ public class AdministradorTest1
      * @see modelo.Administrador#solicitarInformeCliente(modelo.Cliente,java.util.Date,java.util.Date)
      */
     @Test
-    public void testSolicitarInformeCliente5()
+    public void testSolicitarInformeCliente6()
     {
         try
         {
@@ -155,7 +178,7 @@ public class AdministradorTest1
      * @see modelo.Administrador#solicitarInformeCliente(modelo.Cliente,java.util.Date,java.util.Date)
      */
     @Test
-    public void testSolicitarInformeCliente6()
+    public void testSolicitarInformeCliente7()
     {
         try
         {
@@ -293,9 +316,8 @@ public class AdministradorTest1
             Date d2= new Date();
             long horas= (d2.getTime() - d1.getTime())/3600000;
             String resultado= fixture1.admin.solicitarTareasEnCursoColaboradores();
-            Colaborador c1= fixture1.admin.getBdd().getColaboradores().get(0);
             String m1= "Guille" + " " + "Pedro" + " " + "Ordenar" + " " + d1 + " " + "abierta" + " " + horas + "\n";
-            String mensaje= " Colaborador   |   Cliente  | Servicio  | Inicio    | Estado    | Horas accumuladas | \n" + "" + "\n";
+            String mensaje= " Colaborador   |   Cliente  | Servicio  | Inicio    | Estado    | Horas accumuladas | \n" + m1;
             assertEquals("Informe incorrecto",resultado,mensaje);
         }
         catch( final Exception e )
@@ -303,6 +325,7 @@ public class AdministradorTest1
             fail("solicitarTareasEnCursoColaboradores dispara excepcion");
         }
     }
+    
 
     /**
      * @see modelo.Administrador#crearCliente(String,String,String,String,String,String)
