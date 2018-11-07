@@ -102,7 +102,7 @@ public class Administrador extends Usuario {
     /**
      * Metodo por el cual se crea un Servicio y se lo agrega a la Base de Datos.<br>
      * <b>pre:</b> La base de datos se encuentra creada.<br>
-     * <b>post:</b> Se agrega el Servicio a la BDD.<br>
+      * <b>post:</b> Se agrega el Servicio a la BDD.<br>
      * @param descripcion: descripcion que se le agrega al servicio. <br>
      * @param tipo: Tipo de servicio a realizar.<br>
      * @param costo: Costo de realizar el servicio.<br>

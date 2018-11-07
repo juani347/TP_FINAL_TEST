@@ -1,4 +1,4 @@
-package modelo;
+ package modelo;
 
 
 import java.util.Calendar;
@@ -68,7 +68,6 @@ public class Colaborador extends Usuario {
     }
     }
     
-
     /**
      *Metodo que pausa la tarea enviada como parametro.<br>
      * @param tarea: tarea a pausar.<br>
