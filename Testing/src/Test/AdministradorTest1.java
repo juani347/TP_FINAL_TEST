@@ -170,7 +170,7 @@ public class AdministradorTest1
         }
         catch( final Exception e )
         {
-           // fail("solicitarInformeCliente no contempla la excepcion cliente nulo");
+           fail("solicitarInformeCliente no contempla la excepcion cliente nulo");
         }
     }
     
@@ -190,7 +190,7 @@ public class AdministradorTest1
         }
         catch( final Exception e )
         {
-            //fail("solicitarInformeCliente no contempla fechas nulas");
+            fail("solicitarInformeCliente no contempla la excepcion por fechas nulas");
         }
     }
 
@@ -278,7 +278,7 @@ public class AdministradorTest1
         }
         catch( final Exception e )
         {
-            //fail("solicitarInformeColaboradorIntervalo no contempla colaborador null");
+            fail("solicitarInformeColaboradorIntervalo no contempla excepcion por colaborador null");
         }
     }
     
@@ -299,7 +299,7 @@ public class AdministradorTest1
         }
         catch( final Exception e )
         {
-            //fail("solicitarInformeColaboradorIntervalo no contempla fecha null");
+            fail("solicitarInformeColaboradorIntervalo no contempla excepcion por fecha null");
         }
     }
     
@@ -355,11 +355,11 @@ public class AdministradorTest1
         {
             int old= fixture1.admin.getBdd().getClientes().size();
             fixture1.admin.crearCliente(null, "sandra@gmail.com", "1", "2", "234", "grupo1");
-            assertTrue("Se creo un cliente con nombre null",fixture1.admin.getBdd().getClientes().size()==old+1);
-            fail("No lanza excepcion por nombre null");
+            assertTrue("Se creo un cliente con nombre null",fixture1.admin.getBdd().getClientes().size()==old);
         }
         catch( final Exception e )
         {
+            fail("crearCliente dispara excepcion");
         }
     }
 
@@ -391,11 +391,11 @@ public class AdministradorTest1
         {
             int old= fixture1.admin.getBdd().getServicios().size();
             fixture1.admin.crearServicio(null, "Fijo", -1);
-            assertTrue("Se crea el servicio con nombre null y costo negativo",fixture1.admin.getBdd().getServicios().size()==old+1);
-            fail("No lanza excepcion por nombre null");
+            assertTrue("Se crea el servicio con nombre null y costo negativo",fixture1.admin.getBdd().getServicios().size()==old);
         }
         catch( final Exception e )
         {
+            fail("crearServicio lanza excepcion");
         }
     }
 
@@ -427,11 +427,11 @@ public class AdministradorTest1
         {
             int old= fixture1.admin.getBdd().getColaboradores().size();
             fixture1.admin.crearColaborador(null, "leon@gmail.com", "1", "ASC", "qwe", "Colaborador");
-            assertTrue("Crea el colaborador con nombre null",fixture1.admin.getBdd().getColaboradores().size()==old+1);
-            fail("No lanza excepcion por nombre null");
+            assertTrue("Crea el colaborador con nombre null",fixture1.admin.getBdd().getColaboradores().size()==old);
         }
         catch( final Exception e )
         {
+            fail("crearColaborador lanza excepcion");
         }
     }
 
@@ -441,7 +441,16 @@ public class AdministradorTest1
     @Test
     public void testEliminarCliente()
     {
-        fail("Unimplemented");
+        try
+        {
+            int old= fixture1.admin.getBdd().getClientes().size();
+            fixture1.admin.eliminarCliente(fixture1.admin.getBdd().getClientes().get(0));
+            assertTrue("No elimina cliente",fixture1.admin.getBdd().getClientes().size()==old-1);
+        }
+        catch( final Exception e )
+        {
+            fail("crearColaborador lanza excepcion");
+        }
     }
 
     /**
