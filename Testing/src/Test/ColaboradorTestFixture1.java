@@ -57,5 +57,6 @@ public class ColaboradorTestFixture1
         this.bdd.getGrupos().clear();
         this.bdd.getServicios().clear();
         this.bdd.getColaboradores().clear();
+        this.tareas.clear();
     }
 }
