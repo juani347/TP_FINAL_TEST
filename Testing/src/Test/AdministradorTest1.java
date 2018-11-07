@@ -331,27 +331,108 @@ public class AdministradorTest1
      * @see modelo.Administrador#crearCliente(String,String,String,String,String,String)
      */
     @Test
-    public void testCrearCliente()
+    public void testCrearCliente1()
     {
-        fail("Unimplemented");
+        try
+        {
+            int old= fixture1.admin.getBdd().getClientes().size();
+            fixture1.admin.crearCliente("sandra", "sandra@gmail.com", "1", "2", "234", "grupo1");
+            assertTrue("No se crea el cliente",fixture1.admin.getBdd().getClientes().size()==old+1);
+        }
+        catch( final Exception e )
+        {
+            fail("crearCliente lanza excepcion");
+        }
+    }
+    
+    /**
+     * @see modelo.Administrador#crearCliente(String,String,String,String,String,String)
+     */
+    @Test
+    public void testCrearCliente2()
+    {
+        try
+        {
+            int old= fixture1.admin.getBdd().getClientes().size();
+            fixture1.admin.crearCliente(null, "sandra@gmail.com", "1", "2", "234", "grupo1");
+            assertTrue("Se creo un cliente con nombre null",fixture1.admin.getBdd().getClientes().size()==old+1);
+            fail("No lanza excepcion por nombre null");
+        }
+        catch( final Exception e )
+        {
+        }
     }
 
     /**
      * @see modelo.Administrador#crearServicio(String,String,int)
      */
     @Test
-    public void testCrearServicio()
+    public void testCrearServicio1()
     {
-        fail("Unimplemented");
+        try
+        {
+            int old= fixture1.admin.getBdd().getServicios().size();
+            fixture1.admin.crearServicio("Planchar", "Fijo", 20);
+            assertTrue("No se crea el servicio",fixture1.admin.getBdd().getServicios().size()==old+1);
+        }
+        catch( final Exception e )
+        {
+            fail("crearServicio lanza excepcion");
+        }
+    }
+    
+    /**
+     * @see modelo.Administrador#crearServicio(String,String,int)
+     */
+    @Test
+    public void testCrearServicio2()
+    {
+        try
+        {
+            int old= fixture1.admin.getBdd().getServicios().size();
+            fixture1.admin.crearServicio(null, "Fijo", -1);
+            assertTrue("Se crea el servicio con nombre null y costo negativo",fixture1.admin.getBdd().getServicios().size()==old+1);
+            fail("No lanza excepcion por nombre null");
+        }
+        catch( final Exception e )
+        {
+        }
     }
 
     /**
      * @see modelo.Administrador#crearColaborador(String,String,String,String,String,String)
      */
     @Test
-    public void testCrearColaborador()
+    public void testCrearColaborador1()
     {
-        fail("Unimplemented");
+        try
+        {
+            int old= fixture1.admin.getBdd().getColaboradores().size();
+            fixture1.admin.crearColaborador("Leo", "leon@gmail.com", "1", "ASC", "qwe", "Colaborador");
+            assertTrue("No se crea el colaborador",fixture1.admin.getBdd().getColaboradores().size()==old+1);
+        }
+        catch( final Exception e )
+        {
+            fail("crearColaborador lanza excepcion");
+        }
+    }
+    
+    /**
+     * @see modelo.Administrador#crearColaborador(String,String,String,String,String,String)
+     */
+    @Test
+    public void testCrearColaborador2()
+    {
+        try
+        {
+            int old= fixture1.admin.getBdd().getColaboradores().size();
+            fixture1.admin.crearColaborador(null, "leon@gmail.com", "1", "ASC", "qwe", "Colaborador");
+            assertTrue("Crea el colaborador con nombre null",fixture1.admin.getBdd().getColaboradores().size()==old+1);
+            fail("No lanza excepcion por nombre null");
+        }
+        catch( final Exception e )
+        {
+        }
     }
 
     /**
