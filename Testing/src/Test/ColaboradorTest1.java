@@ -3,6 +3,7 @@ package Test;
 import java.util.Date;
 
 import modelo.Cliente;
+import modelo.Colaborador;
 import modelo.Servicio;
 
 import modelo.Tarea;
@@ -364,9 +365,110 @@ public class ColaboradorTest1
      * @see modelo.Colaborador#solicitarITareasIntervalo(java.util.Date,java.util.Date)
      */
     @Test
-    public void testSolicitarITareasIntervalo()
+    public void testSolicitarITareasIntervalo1()
     {
-        fail("Unimplemented");
+        try
+        {
+            Colaborador col1=this.fixture1.bdd.getColaboradores().get(0);
+            Date d1= new Date(2018,10,1);
+            Date d2= new Date(2018,10,30);
+            long horas= (d2.getTime() - d1.getTime())/3600000;
+            String resultado=col1.solicitarITareasIntervalo(d1, d2);
+            String mensaje= /*"Cliente  |  Tarea de servicio  | Total horas\n" +*/ "Juan" + " " + "Limpiar" + " " + horas + "\n";
+            assertEquals("Informe incorrecto",resultado,mensaje);
+        }
+        catch( final Exception e )
+        {
+            fail("solicitarInformeColaboradorIntervalo dispara excepcion");
+        }
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasIntervalo(java.util.Date,java.util.Date)
+     */
+    @Test
+    public void testSolicitarITareasIntervalo2()
+    {
+        try
+        {
+            Colaborador col1= new Colaborador("Peter","peter@gmail.com","111111111","111A","1234","Colaborador");
+            Date d1= new Date(2018,10,1);
+            Date d2= new Date(2018,10,20);
+            long horas= (d2.getTime() - d1.getTime())/3600000;
+            String resultado= col1.solicitarITareasIntervalo(d1, d2);
+            //String mensaje= "Cliente  |  Tarea de servicio  | Total horas\n";
+            String mensaje="";
+            assertEquals("Informe incorrecto",resultado,mensaje);
+        }
+        catch( final Exception e )
+        {
+            fail("solicitarInformeColaboradorIntervalo dispara excepcion");
+        }
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasIntervalo(java.util.Date,java.util.Date)
+     */
+    @Test
+    public void testSolicitarITareasIntervalo3()
+    {
+        try
+        {
+            Colaborador col1=this.fixture1.bdd.getColaboradores().get(0);
+            Date d1= new Date(2018,9,1);
+            Date d2= new Date(2018,10,20);
+            long horas= (d2.getTime() - d1.getTime())/3600000;
+            String resultado=col1.solicitarITareasIntervalo(d1, d2);
+            //String mensaje= "Cliente  |  Tarea de servicio  | Total horas\n";
+            String mensaje="";
+            assertEquals("Informe incorrecto",resultado,mensaje);
+        }
+        catch( final Exception e )
+        {
+            fail("solicitarInformeColaboradorIntervalo dispara excepcion");
+        }
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasIntervalo(java.util.Date,java.util.Date)
+     */
+    @Test
+    public void testSolicitarITareasIntervalo4()
+    {
+        try
+        {
+            Colaborador col1= null;
+            Date d1= new Date(2018,9,1);
+            Date d2= new Date(2018,10,20);
+            long horas= (d2.getTime() - d1.getTime())/3600000;
+            String resultado=col1.solicitarITareasIntervalo(d1, d2);
+            fail("No dispara excepcion por colaborador null");
+        }
+        catch( final Exception e )
+        {
+            fail("solicitarInformeColaboradorIntervalo no contempla colaborador null");
+        }
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasIntervalo(java.util.Date,java.util.Date)
+     */
+    @Test
+    public void testSolicitarITareasIntervalo5()
+    {
+        try
+        {
+            Colaborador col1= new Colaborador("Peter","peter@gmail.com","111111111","111A","1234","Colaborador");
+            Date d1= null;
+            Date d2= null;
+            long horas= (d2.getTime() - d1.getTime())/3600000;
+            String resultado=col1.solicitarITareasIntervalo(d1, d2);
+            fail("No dispara excepcion por fecha null");
+        }
+        catch( final Exception e )
+        {
+            fail("solicitarInformeColaboradorIntervalo no contempla fecha null");
+        }
     }
 
     /**
@@ -377,12 +479,12 @@ public class ColaboradorTest1
     {
         try
         {
-            Cliente c1=new Cliente("Claudio","Claudio@gmail.com","45678","54345","657828i","grupo3");
+            Cliente c1=new Cliente("Watson","Watson@gmail.com","34567","43902","52c52","grupo1");
             Date d1= new Date(2018,10,1);
             Date d2= new Date(2018,10,20);
             long horas= (d2.getTime() - d1.getTime())/3600000;
             String resultado= fixture1.colab.solicitarITareasIntervaloCliente(c1, d1, d2);
-            String mensaje= "Tarea de Servicio | Total horas  | Importe \n" + "Investigar"+ " " + horas + " " + 5200 + "\n";
+            String mensaje=/* "Tarea de Servicio | Total horas  | Importe \n" + */"Investigar"+ " " + horas + " " + 5200 + "\n";
             assertEquals("Informe incorrecto",resultado,mensaje);
         }
         catch( final Exception e )
@@ -405,7 +507,7 @@ public class ColaboradorTest1
             long horas= (d2.getTime() - d1.getTime())/3600000;
             double costo= (double) horas * 89;
             String resultado= this.fixture1.colab.solicitarITareasIntervaloCliente(c2, d1, d2);
-            String mensaje= "Tarea de Servicio | Total horas  | Importe \n" + "Pasear"+ " " + horas + " " + costo + "\n";
+            String mensaje= /*"Tarea de Servicio | Total horas  | Importe \n" +*/ "Pasear"+ " " + horas + " " + costo + "\n";
             assertEquals("Informe incorrecto",resultado,mensaje);
         }
         catch( final Exception e )
@@ -426,7 +528,8 @@ public class ColaboradorTest1
             Date d1= new Date(2018,10,1);
             Date d2= new Date(2018,10,20);
             String resultado= this.fixture1.colab.solicitarITareasIntervaloCliente(c1, d1, d2);
-            String mensaje= "Tarea de Servicio | Total horas  | Importe \n";
+            //String mensaje= "Tarea de Servicio | Total horas  | Importe \n";
+            String mensaje="";
             assertEquals("Informe incorrecto",resultado,mensaje);
         }
         catch( final Exception e )
@@ -446,9 +549,9 @@ public class ColaboradorTest1
             Cliente c1=new Cliente("Lucrecia","Lucrecia@gmail.com","345234","434231","524455","grupo1");
             Date d1= new Date(2018,9,1);
             Date d2= new Date(2018,10,20);
-            
             String resultado=this.fixture1.colab.solicitarITareasIntervaloCliente(c1, d1, d2);
-            String mensaje= "Tarea de Servicio | Total horas  | Importe \n";
+            //String mensaje= "Tarea de Servicio | Total horas  | Importe \n";
+            String mensaje="";
             assertEquals("Informe incorrecto",resultado,mensaje);
         }
         catch( final Exception e )
@@ -490,7 +593,7 @@ public class ColaboradorTest1
             Date d2= null;
             long horas= (d2.getTime() - d1.getTime())/3600000;
             double costo= (double) horas * 89;
-            String resultado= fixture1.admin.solicitarInformeCliente(c1, d1, d2);
+            String resultado= this.fixture1.colab.solicitarITareasIntervaloCliente(c1, d1, d2);
             fail("No dispara excepcion por fecha null");
         }
         catch( final Exception e )
@@ -503,16 +606,175 @@ public class ColaboradorTest1
      * @see modelo.Colaborador#solicitarITareasEstadoIntervalo(String,java.util.Date,java.util.Date)
      */
     @Test
-    public void testSolicitarITareasEstadoIntervalo()
+    public void testSolicitarITareasEstadoIntervalo1()
     {
-        fail("Unimplemented");
+        try
+        {
+            String resp = "Cliente  |  Tarea de Servicio  |  Inicio  |  Estado  |  Horas Acumuladas\n";
+            Date d1= new Date(2018,10,1);
+            Date d2= new Date(2018,10,20);
+            String mensaje=this.fixture1.colab1.solicitarITareasEstadoIntervalo("cerrada", d1, d2);
+            long horas=(d2.getTime()-d1.getTime())/3600000;
+            resp+=this.fixture1.tareas.get(3).getCliente()+" "+fixture1.tareas.get(3).getServicio().getDescripcion()+" "+fixture1.tareas.get(3).getFechainicio()+" "+fixture1.tareas.get(3).getEstado().devolverestado()+" ";
+            assertEquals("Informe incorrecto",resp,mensaje);
+        }
+        catch(final Exception e)
+        {
+            fail("SolicitarITareasEstadoIntervalo dispara excepción (error inesperado)");
+        }
     }
-
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasEstadoIntervalo(String,java.util.Date,java.util.Date)
+     */
+    @Test
+    public void testSolicitarITareasEstadoIntervalo2()
+    {
+        try
+        {
+            Colaborador col=new Colaborador();
+            String resp = "Cliente  |  Tarea de Servicio  |  Inicio  |  Estado  |  Horas Acumuladas\n";
+            Date d1= new Date(2018,10,1);
+            Date d2= new Date(2018,10,20);
+            String mensaje=col.solicitarITareasEstadoIntervalo("cerrada", d1, d2);
+            long horas=(d2.getTime()-d1.getTime())/3600000;
+            assertEquals("Informe incorrecto",resp,mensaje);
+        }
+        catch(final Exception e)
+        {
+            fail("SolicitarITareasEstadoIntervalo dispara excepción");
+        }
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasEstadoIntervalo(String,java.util.Date,java.util.Date)
+     */
+    @Test
+    public void testSolicitarITareasEstadoIntervalo3()
+    {
+        try
+        {
+            Colaborador col=null;
+            String resp = "Cliente  |  Tarea de Servicio  |  Inicio  |  Estado  |  Horas Acumuladas\n";
+            Date d1= new Date(2018,10,1);
+            Date d2= new Date(2018,10,20);
+            String mensaje=col.solicitarITareasEstadoIntervalo("cerrada", d1, d2);
+            long horas=(d2.getTime()-d1.getTime())/3600000;
+            fail("SolicitarITareasEstadoIntervalo no dispara excepcion");
+        }
+        catch(final Exception e)
+        {
+            fail("SolicitarITareasEstadoIntervalo dispara excepción");
+        }
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasEstadoIntervalo(String,java.util.Date,java.util.Date)
+     */
+    @Test
+    public void testSolicitarITareasEstadoIntervalo4()
+    {
+        try
+        {
+            String resp = "Cliente  |  Tarea de Servicio  |  Inicio  |  Estado  |  Horas Acumuladas\n";
+            Date d1=null;
+            Date d2=null;
+            String mensaje=this.fixture1.colab1.solicitarITareasEstadoIntervalo("cerrada", d1, d2);
+            long horas=(d2.getTime()-d1.getTime())/3600000;
+            fail("SolicitarITareasEstadoIntervalo no dispara excepcion");
+        }
+        catch(final Exception e)
+        {
+            fail("SolicitarITareasEstadoIntervalo dispara excepción");
+        }
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasEstadoIntervalo(String,java.util.Date,java.util.Date)
+     */
+    @Test
+    public void testSolicitarITareasEstadoIntervalo5()
+    {
+        try
+        {
+            String resp = "Cliente  |  Tarea de Servicio  |  Inicio  |  Estado  |  Horas Acumuladas\n";
+            Date d1= new Date(2018,9,1);
+            Date d2= new Date(2018,10,20);
+            String mensaje=this.fixture1.colab1.solicitarITareasEstadoIntervalo("cerrada", d1, d2);
+            long horas=(d2.getTime()-d1.getTime())/3600000;
+            resp+=this.fixture1.tareas.get(3).getCliente()+" "+fixture1.tareas.get(3).getServicio().getDescripcion()+" "+fixture1.tareas.get(3).getFechainicio()+" "+fixture1.tareas.get(3).getEstado().devolverestado()+" ";
+            assertEquals("Informe incorrecto",resp,mensaje);
+        }
+        catch(final Exception e)
+        {
+            fail("SolicitarITareasEstadoIntervalo dispara excepción (error inesperado)");
+        }
+    }
+    
     /**
      * @see modelo.Colaborador#solicitarITareasEnCurso()
      */
     @Test
-    public void testSolicitarITareasEnCurso()
+    public void testSolicitarITareasEnCurso1()
+    {
+        try
+        {
+            Date d1= new Date(2018,10,20);
+            Date d2= new Date(2018,10,1);
+            long horas= (d2.getTime() - d1.getTime())/3600000;
+            String resultado=this.fixture1.colab1.solicitarITareasEnCurso();
+            Colaborador c1= fixture1.admin.getBdd().getColaboradores().get(0);
+            String m1= "Pilar" + " " + "Watson" + " " + "Investigar" + " " + d1 + " " + "cerrada";
+            String mensaje= " Colaborador   |   Cliente  | Servicio  | Inicio    | Estado    | Horas accumuladas | \n" + "" + "\n";
+            assertEquals("Informe incorrecto",resultado,mensaje);
+        }
+        catch( final Exception e )
+        {
+            fail("solicitarTareasEnCursoColaboradores dispara excepcion");
+        }
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasEnCurso()
+     */
+    @Test
+    public void testSolicitarITareasEnCurso2()
+    {
+        fail("Unimplemented");
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasEnCurso()
+     */
+    @Test
+    public void testSolicitarITareasEnCurso3()
+    {
+        fail("Unimplemented");
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasEnCurso()
+     */
+    @Test
+    public void testSolicitarITareasEnCurso4()
+    {
+        fail("Unimplemented");
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasEnCurso()
+     */
+    @Test
+    public void testSolicitarITareasEnCurso5()
+    {
+        fail("Unimplemented");
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasEnCurso()
+     */
+    @Test
+    public void testSolicitarITareasEnCurso6()
     {
         fail("Unimplemented");
     }

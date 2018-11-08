@@ -17,6 +17,9 @@ public class ColaboradorTestFixture1
 {
     public Administrador admin=new Administrador();
     public Colaborador colab=new Colaborador();
+    public Colaborador colab1=new Colaborador();
+    public Colaborador colab2=new Colaborador();
+    public Colaborador colab3=new Colaborador();
     public BaseDeDatos bdd=new BaseDeDatos();
     public ArrayList<Tarea> tareas=new ArrayList<Tarea>();
     
@@ -27,17 +30,30 @@ public class ColaboradorTestFixture1
     public void setUp()
     {
         this.bdd.setAdmin(admin);
-        this.bdd.getClientes().add(new Cliente("Juan","juan@gmail.com","4324234","2121321312","123","grupo1"));
-        this.bdd.getClientes().add(new Cliente("Fran","fran@gmail.com","1234234","2134536546","222","grupo3"));
-        this.bdd.getClientes().add(new Cliente("Nico","nico@gmail.com","54354234","12111112","333","grupo2"));
-        this.bdd.getClientes().add(new Cliente("Pedro","pedro@gmail.com","1124234","0123212","443","grupo2"));
-        this.bdd.getColaboradores().add(45678,new Colaborador("Pilar","Pilar@gmail.com","4567893","12332","svhbjdlk","Colaborador"));
-        this.bdd.getColaboradores().add(9890,new Colaborador("Guillermo","Guille@gmail.com","67890","4r567890","s4e5r68t79uo","Colaborador"));
-        this.bdd.getColaboradores().add(45678,new Colaborador("Oscar","Oscar@gmail.com","23456","765123","bg3yvr8","Colaborador"));
-        this.bdd.getColaboradores().add(45678,new Colaborador("Gustavo","Gustavo@gmail.com","094582","095456789","wg0wr3389","Colaborador"));
-        this.bdd.getServicios().add(new Servicio("Limpiar","tipoA",52));
-        this.bdd.getServicios().add(new Servicio("Cocinar","tipoA",100));
-        this.bdd.getServicios().add(new Servicio("Barrer","tipoA",150));
+        Cliente cli1=new Cliente("Juan","juan@gmail.com","4324234","2121321312","123","grupo1");
+        Cliente cli2=new Cliente("Fran","fran@gmail.com","1234234","2134536546","222","grupo3");
+        Cliente cli3=new Cliente("Nico","nico@gmail.com","54354234","12111112","333","grupo2");
+        Cliente cli4=new Cliente("Pedro","pedro@gmail.com","1124234","0123212","443","grupo2");
+        this.bdd.getClientes().add(cli1);
+        this.bdd.getClientes().add(cli2);
+        this.bdd.getClientes().add(cli3);
+        this.bdd.getClientes().add(cli4);
+        Colaborador colab1=new Colaborador("Pilar","Pilar@gmail.com","4567893","12332","svhbjdlk","Colaborador");
+        Colaborador colab2=new Colaborador("Guillermo","Guille@gmail.com","67890","4r567890","s4e5r68t79uo","Colaborador");
+        Colaborador colab3=new Colaborador("Oscar","Oscar@gmail.com","23456","765123","bg3yvr8","Colaborador");
+        Colaborador colab4=new Colaborador("Gustavo","Gustavo@gmail.com","094582","095456789","wg0wr3389","Colaborador");
+        Servicio s1=new Servicio("Limpiar","Porhora",52);
+        Servicio s2=new Servicio("Cocinar","Fijo",100);
+        Servicio s3=new Servicio("Barrer","Fijo",150);
+        this.bdd.getServicios().add(s1);
+        this.bdd.getServicios().add(s2);
+        this.bdd.getServicios().add(s3);
+        Tarea ta1=new Tarea(s1,cli1,colab1);ta1.setEstado(new CerradaState(ta1));ta1.setFechacierre(new Date(2018,10,30));ta1.setFechainicio(new Date(2018,10,1));
+        colab1.getTareas().put(cli1,ta1);
+        this.bdd.getColaboradores().add(colab1);
+        this.bdd.getColaboradores().add(colab2);
+        this.bdd.getColaboradores().add(colab3);
+        this.bdd.getColaboradores().add(colab4);
         Tarea t1=new Tarea(new Servicio("Investigar","Fijo",5200),new Cliente("Watson","Watson@gmail.com","34567","43902","52c52","grupo1"),colab);
         Tarea t2=new Tarea(new Servicio("Rellenar","Porhora",52),new Cliente("Lucrecia","Lucrecia@gmail.com","345234","434231","524455","grupo1"),colab);
         Tarea t3=new Tarea(new Servicio("Procesar","Fijo",1000),new Cliente("Jeremias","Jeremias@gmail.com","4567890","12908","09876545","grupo2"),colab);
@@ -57,6 +73,10 @@ public class ColaboradorTestFixture1
         this.tareas.get(3).setEstado(new CerradaState(this.tareas.get(3)));
         this.colab.getTareas().put(this.tareas.get(3).getCliente(), this.tareas.get(3));
         this.tareas.get(4).setEstado(new CerradaState(this.tareas.get(4)));
+        this.colab.getTareas().put(this.tareas.get(4).getCliente(), this.tareas.get(4));
+        this.colab1.setNombre("Pilar");
+        this.colab1.getTareas().put(this.tareas.get(0).getCliente(), this.tareas.get(0));
+        this.colab2.getTareas().put(this.tareas.get(3).getCliente(),this.tareas.get(3));
     }
 
     public void tearDown()
