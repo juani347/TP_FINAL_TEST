@@ -77,13 +77,13 @@ public class ColaboradorTest1
     {
         try
         {
-            int size=this.fixture1.colab.getTareas().size();
-            this.fixture1.colab.crearTarea(new Servicio("Limpiar","tipoA",52),new Cliente("Fran","fran@gmail.com","1234234","2134536546","222","grupo3"));
-            assertTrue("No se agregó la tarea",size+1==this.fixture1.colab.getTareas().size());
+            Colaborador col=null;
+            col.crearTarea(new Servicio("Limpiar","tipoA",52),new Cliente("Fran","fran@gmail.com","1234234","2134536546","222","grupo3"));
+            fail("Colaborador nulo no lanza excepción");
         }
         catch(final Exception e)
         {
-            fail("Crear una tarea existente dispara excepcion");
+            fail("Colaborador nulo lanza excepción");
         }
     }
     
@@ -96,15 +96,16 @@ public class ColaboradorTest1
         try
         {
             int size=this.fixture1.colab.getTareas().size();
-            this.fixture1.colab.crearTarea(new Servicio("Cocinar","tipoA",100),new Cliente("Juan","juan@gmail.com","4324234","2121321312","123","grupo1"));
+            this.fixture1.colab.crearTarea(new Servicio("Limpiar","tipoA",52),new Cliente("Juan","juan@gmail.com","4324234","2121321312","123","grupo1"));
             assertTrue("No se agregó la tarea",size+1==this.fixture1.colab.getTareas().size());
+            fail("Se agrego una tarea repetida y no se disparo excepcion");
         }
         catch(final Exception e)
         {
-            fail("Crear una tarea con un cliente atendido en otra tarea dispara excepcion");
+            fail("Se agrego una tarea repetida y se disparo excepcion");
         }
     }
-    
+
     /**
      * @see modelo.Colaborador#crearTarea(modelo.Servicio,modelo.Cliente)
      */
@@ -114,48 +115,12 @@ public class ColaboradorTest1
         try
         {
             int size=this.fixture1.colab.getTareas().size();
-            this.fixture1.colab.crearTarea(new Servicio("Cocinar","tipoA",100),new Cliente("Nico","nico@gmail.com","54354234","12111112","333","grupo2"));
-            assertTrue("No se agregó la tarea",size+1==this.fixture1.colab.getTareas().size());   
-        }
-        catch(final Exception e)
-        {
-            fail("Crear una tarea existente dispara excepcion");
-        }
-    }
-    
-    /**
-     * @see modelo.Colaborador#crearTarea(modelo.Servicio,modelo.Cliente)
-     */
-    @Test
-    public void testCrearTarea5()
-    {
-        try
-        {
-            int size=this.fixture1.colab.getTareas().size();
             this.fixture1.colab.crearTarea(null,null);
             fail("Crear una tarea con contenido nulo no dispara excepcion");
         }
         catch(final Exception e)
         {
-            
-        }
-    }
-    
-    /**
-     * @see modelo.Colaborador#crearTarea(modelo.Servicio,modelo.Cliente)
-     */
-    @Test
-    public void testCrearTarea6()
-    {
-        try
-        {
-            int size=this.fixture1.colab.getTareas().size();
-            this.fixture1.colab.crearTarea(new Servicio("Barrer","tipoA",150),new Cliente("Fran","fran@gmail.com","1234234","2134536546","222","grupo3"));
-            fail("Crear una tarea repetida y con un cliente atendido en otra tarea dispara excepcion");
-        }
-        catch(final Exception e)
-        {
-            
+            fail("Crear una tarea con contenido nulo no dispara excepcion");
         }
     }
 
@@ -185,31 +150,13 @@ public class ColaboradorTest1
     {
         try
         {
-            int size=this.fixture1.colab.getTareas().size();
-            this.fixture1.colab.eliminarTarea(this.fixture1.tareas.get(0));
-            assertTrue("No se elimino la tarea",size-1==this.fixture1.colab.getTareas().size());
-            
-        }
-        catch(final Exception e)
-        {
-            fail("No se verifica que se quite una tarea eliminada previamente");
-        }
-    }
-    
-    /**
-     * @see modelo.Colaborador#eliminarTarea(modelo.Tarea)
-     */
-    @Test
-    public void testEliminarTarea3()
-    {
-        try
-        {
             //int size=this.fixture1.colab.getTareas().size();
             this.fixture1.colab.eliminarTarea(null);
             fail("No se verifica que la tarea sea null");
         }
         catch(final Exception e)
         {
+            fail("Eliminar una tarea nula dispara excepcion");
         }
     }
 
@@ -243,6 +190,7 @@ public class ColaboradorTest1
         }
         catch(final Exception e)
         {
+            fail("Se lanza excepcion pues se intenta cerrar una tarea cerrada");
         }
     }
     
@@ -259,6 +207,7 @@ public class ColaboradorTest1
         }
         catch(final Exception e)
         {
+            fail("Se lanza excepcion al cerrar una tarea null");
         }
     }
     
@@ -292,6 +241,7 @@ public class ColaboradorTest1
         }
         catch(final Exception e)
         {
+            fail("Lanza excepcion al pausar una tarea ya pausada");
         }
     }
     
@@ -308,6 +258,24 @@ public class ColaboradorTest1
         }
         catch(final Exception e)
         {
+            fail("Lanza excepcion al pausar una tarea cerrada");
+        }
+    }
+    
+    /**
+     * @see modelo.Colaborador#pausarTarea(modelo.Tarea)
+     */
+    @Test
+    public void testPausarTarea4()
+    {
+        try
+        {
+            this.fixture1.colab.pausarTarea(null);
+            fail("No se verifica que la tarea sea nula");
+        }
+        catch(final Exception e)
+        {
+            fail("Lanza excepcion al pausar una tarea nula");
         }
     }
 
@@ -320,11 +288,11 @@ public class ColaboradorTest1
         try
         {
             this.fixture1.colab.reanudarTarea(this.fixture1.tareas.get(0));
-            fail("No se verifica si la tarea esta abierta");
-            
+            fail("No se verifica si la tarea esta abierta");   
         }
         catch(final Exception e)
         {
+            fail("Lanza excepcion al reanudar una tarea abierta");
         }
     }
     
@@ -358,6 +326,24 @@ public class ColaboradorTest1
         }
         catch(final Exception e)
         {
+            fail("Al abrir una tarea cerrada se lanza excepcion");
+        }
+    }
+    
+    /**
+     * @see modelo.Colaborador#reanudarTarea(modelo.Tarea)
+     */
+    @Test
+    public void testReanudarTarea4()
+    {
+        try
+        {
+            this.fixture1.colab.reanudarTarea(null);
+            fail("No se verifica que la tarea sea nula");
+        }
+        catch(final Exception e)
+        {
+            fail("Al abrir una tarea nula se lanza excepcion");
         }
     }
     
@@ -402,7 +388,7 @@ public class ColaboradorTest1
         }
         catch( final Exception e )
         {
-            fail("solicitarInformeColaboradorIntervalo dispara excepcion");
+            fail("solicitarInformeColaboradorIntervalo dispara excepcion al utilizar un usuario no registrado");
         }
     }
     
@@ -429,9 +415,9 @@ public class ColaboradorTest1
         }
     }
     
-    /**
+     /**
      * @see modelo.Colaborador#solicitarITareasIntervalo(java.util.Date,java.util.Date)
-     */
+     *//*
     @Test
     public void testSolicitarITareasIntervalo4()
     {
@@ -448,7 +434,7 @@ public class ColaboradorTest1
         {
             fail("solicitarInformeColaboradorIntervalo no contempla colaborador null");
         }
-    }
+    } */
     
     /**
      * @see modelo.Colaborador#solicitarITareasIntervalo(java.util.Date,java.util.Date)
@@ -649,7 +635,7 @@ public class ColaboradorTest1
     /**
      * @see modelo.Colaborador#solicitarITareasEstadoIntervalo(String,java.util.Date,java.util.Date)
      */
-    @Test
+    /* @Test
     public void testSolicitarITareasEstadoIntervalo3()
     {
         try
@@ -666,7 +652,7 @@ public class ColaboradorTest1
         {
             fail("SolicitarITareasEstadoIntervalo dispara excepción");
         }
-    }
+    } */
     
     /**
      * @see modelo.Colaborador#solicitarITareasEstadoIntervalo(String,java.util.Date,java.util.Date)
@@ -712,6 +698,52 @@ public class ColaboradorTest1
     }
     
     /**
+     * @see modelo.Colaborador#solicitarITareasEstadoIntervalo(String,java.util.Date,java.util.Date)
+     */
+    @Test
+    public void testSolicitarITareasEstadoIntervalo6()
+    {
+        try
+        {
+            String resp = "Cliente  |  Tarea de Servicio  |  Inicio  |  Estado  |  Horas Acumuladas\n";
+            Date d1= new Date(2018,10,1);
+            Date d2= new Date(2018,10,20);
+            String mensaje=this.fixture1.colab1.solicitarITareasEstadoIntervalo("", d1, d2);
+            long horas=(d2.getTime()-d1.getTime())/3600000;
+            //resp+=this.fixture1.tareas.get(3).getCliente()+" "+fixture1.tareas.get(3).getServicio().getDescripcion()+" "+fixture1.tareas.get(3).getFechainicio()+" "+fixture1.tareas.get(3).getEstado().devolverestado()+" ";
+            assertEquals("Informe incorrecto",resp,mensaje);
+            fail("No lanza excepcion por estado vacio");
+        }
+        catch(final Exception e)
+        {
+            fail("SolicitarITareasEstadoIntervalo dispara excepción por estado vacio");
+        }
+    }
+    
+    /**
+     * @see modelo.Colaborador#solicitarITareasEstadoIntervalo(String,java.util.Date,java.util.Date)
+     */
+    @Test
+    public void testSolicitarITareasEstadoIntervalo7()
+    {
+        try
+        {
+            String resp = "Cliente  |  Tarea de Servicio  |  Inicio  |  Estado  |  Horas Acumuladas\n";
+            Date d1= new Date(2018,10,1);
+            Date d2= new Date(2018,10,20);
+            String mensaje=this.fixture1.colab1.solicitarITareasEstadoIntervalo(null, d1, d2);
+            long horas=(d2.getTime()-d1.getTime())/3600000;
+            //resp+=this.fixture1.tareas.get(3).getCliente()+" "+fixture1.tareas.get(3).getServicio().getDescripcion()+" "+fixture1.tareas.get(3).getFechainicio()+" "+fixture1.tareas.get(3).getEstado().devolverestado()+" ";
+            assertEquals("Informe incorrecto",resp,mensaje);
+            fail("No lanza excepcion por estado nulo");
+        }
+        catch(final Exception e)
+        {
+            fail("SolicitarITareasEstadoIntervalo dispara excepción por estado nulo");
+        }
+    }
+    
+    /**
      * @see modelo.Colaborador#solicitarITareasEnCurso()
      */
     @Test
@@ -732,50 +764,5 @@ public class ColaboradorTest1
         {
             fail("solicitarTareasEnCursoColaboradores dispara excepcion");
         }
-    }
-    
-    /**
-     * @see modelo.Colaborador#solicitarITareasEnCurso()
-     */
-    @Test
-    public void testSolicitarITareasEnCurso2()
-    {
-        fail("Unimplemented");
-    }
-    
-    /**
-     * @see modelo.Colaborador#solicitarITareasEnCurso()
-     */
-    @Test
-    public void testSolicitarITareasEnCurso3()
-    {
-        fail("Unimplemented");
-    }
-    
-    /**
-     * @see modelo.Colaborador#solicitarITareasEnCurso()
-     */
-    @Test
-    public void testSolicitarITareasEnCurso4()
-    {
-        fail("Unimplemented");
-    }
-    
-    /**
-     * @see modelo.Colaborador#solicitarITareasEnCurso()
-     */
-    @Test
-    public void testSolicitarITareasEnCurso5()
-    {
-        fail("Unimplemented");
-    }
-    
-    /**
-     * @see modelo.Colaborador#solicitarITareasEnCurso()
-     */
-    @Test
-    public void testSolicitarITareasEnCurso6()
-    {
-        fail("Unimplemented");
     }
 }

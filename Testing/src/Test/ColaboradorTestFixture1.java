@@ -59,7 +59,7 @@ public class ColaboradorTestFixture1
         Tarea t3=new Tarea(new Servicio("Procesar","Fijo",1000),new Cliente("Jeremias","Jeremias@gmail.com","4567890","12908","09876545","grupo2"),colab);
         Tarea t4=new Tarea(new Servicio("Transportar","Fijo",1500),new Cliente("Claudio","Claudio@gmail.com","45678","54345","657828i","grupo3"),colab);
         Tarea t5=new Tarea(new Servicio("Pasear","Porhora",89),new Cliente("Adolfo","adolfo@gmail.com","345678","655432","4r3r21","grupo2"),colab);
-        t1.setFechacierre(new Date(2018,10,20));t1.setFechainicio(new Date(2018,10,1));
+        t4.setFechacierre(new Date(2018,10,20));t4.setFechainicio(new Date(2018,10,1));
         t5.setFechacierre(new Date(2018,10,10));t5.setFechainicio(new Date(2018,10,1));
         this.tareas.add(t1);
         this.tareas.add(t2);
